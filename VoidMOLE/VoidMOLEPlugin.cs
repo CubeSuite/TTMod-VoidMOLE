@@ -3,6 +3,7 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
+using VoidMOLE.Patches;
 
 namespace VoidMOLE
 {
@@ -20,14 +21,10 @@ namespace VoidMOLE
             Logger.LogInfo($"PluginName: {PluginName}, VersionString: {VersionString} is loading...");
             Harmony.PatchAll();
 
-            // ToDo: Apply Patches
+            Harmony.CreateAndPatchAll(typeof(MOLEActionPatch));
 
             Logger.LogInfo($"PluginName: {PluginName}, VersionString: {VersionString} is loaded.");
             Log = Logger;
-        }
-
-        private void Update() {
-            // ToDo: Delete If Not Needed
         }
     }
 }

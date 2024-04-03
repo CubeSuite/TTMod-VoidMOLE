@@ -19,10 +19,9 @@ namespace VoidMOLE.Patches
                 InventoryWrapper inventoryForPlayer = NetworkMessageRelay.GetInventoryForPlayer(sender);
                 List<NetworkInventorySlot> list = new List<NetworkInventorySlot>();
                 foreach (KeyValuePair<ResourceInfo, int> pair in digResultInfo.resourceCounts) {
-                    if (pair.Key.displayName == "Limestone" || pair.Key.displayName == "Plantmatter") {
-                        Debug.Log($"Skipping add of {pair.Value} {pair.Key.displayName}");
-                        continue;
-                    }
+                    if(pair.Key.displayName == "Limestone" && VoidMOLEPlugin.voidLimestone.Value) continue;
+                    if(pair.Key.displayName == "Plantmatter" && VoidMOLEPlugin.voidPlantmatter.Value) continue;
+                    
                     if (inventoryForPlayer.AddResources(pair.Key, pair.Value)) {
                         list.Add(pair);
                     }
